@@ -1,1 +1,17 @@
-<p>add-stock works!</p>
+<form [formGroup]="addStockForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <input
+      type="text"
+      formControlName="name"
+      class="form-control"
+      placeholder="Enter Name"
+    >
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="addStockForm.invalid"
+    >
+      Add Stock
+    </button>
+  </div>
+</form>
