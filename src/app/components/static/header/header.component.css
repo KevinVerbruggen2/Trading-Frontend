@@ -1,0 +1,20 @@
+#header-container {
+  background-color: #2d2f31;
+}
+
+h1 {
+  font-family: "Rubik Burned", serif;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #3c4043;
+  margin-top: 1rem;
+}
+
+a {
+  color: white;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
