@@ -1,0 +1,60 @@
+<div class="container">
+  <form [formGroup]="bulkAddForm" (ngSubmit)="onSubmit()" class="bulk-add-form">
+    <div class="form-group">
+      <label for="numberOfStocks">Number of Stocks</label>
+      <input
+        type="number"
+        id="numberOfStocks"
+        formControlName="numberOfStocks"
+        class="form-control"
+        placeholder="Enter number of stocks"
+        min="1"
+      >
+      <div *ngIf="bulkAddForm.get('numberOfStocks')?.invalid && bulkAddForm.get('numberOfStocks')?.touched" class="error-message">
+        Please enter a valid number of stocks.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="distributor">Distributor</label>
+      <select
+        id="distributor"
+        formControlName="distributor"
+        class="form-control"
+      >
+        <option value="">Select Distributor</option>
+        <option *ngFor="let dist of distributors" [value]="dist.value">
+          {{dist.label}}
+        </option>
+      </select>
+      <div *ngIf="bulkAddForm.get('distributor')?.invalid && bulkAddForm.get('distributor')?.touched" class="error-message">
+        Please select a distributor.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="currency">Currency</label>
+      <select
+        id="currency"
+        formControlName="currency"
+        class="form-control"
+      >
+        <option value="">Select Currency</option>
+        <option *ngFor="let currency of currencyOptions" [value]="currency.value">
+          {{currency.label}}
+        </option>
+      </select>
+      <div *ngIf="bulkAddForm.get('currency')?.invalid && bulkAddForm.get('currency')?.touched" class="error-message">
+        Please select a currency.
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="bulkAddForm.invalid"
+    >
+      Add Stocks in Bulk
+    </button>
+  </form>
+</div>

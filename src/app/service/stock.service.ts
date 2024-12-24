@@ -13,16 +13,21 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
-  /*
-  @PostMapping("/scrape")
-    public ResponseEntity<Stock> scrapeAndCreateStock(@RequestParam String name) {
-   */
+  //do the same as above but pu the param in body
   scrapeStockData(stockName: string): Observable<StockInterface> {
-    // post request to backend
-    return this.http.post<StockInterface>(`${this.url}/scrape?name=${stockName}`, {});
+    let stockInterface: StockInterface = {
+      name: stockName
+    }
+    return this.http.post<StockInterface>(`${this.url}/scrape`, stockInterface);
   }
 
-
-
+  scrapeStockDataBulk(numberOfStocks : number, distributor: String, currency: String): Observable<StockInterface[]> {
+    let params = {
+      numberOfStocks: numberOfStocks,
+      distributor: distributor,
+      currency: currency
+    }
+    return this.http.post<StockInterface[]>(`${this.url}/scrape/bulk`, params);
+  }
 
 }

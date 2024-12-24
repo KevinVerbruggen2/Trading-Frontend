@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {StockService} from "../../../service/stock.service";
 import {SubscriptionService} from "../../../service/subscription.service";
+import {TestAanoopBulkAddComponent} from "../test-aanoop-bulk-add/test-aanoop-bulk-add.component";
 
 @Component({
   selector: 'app-add-stock',
   standalone: true,
   templateUrl: './add-stock.component.html',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TestAanoopBulkAddComponent
   ],
   styleUrls: ['./add-stock.component.css']
 })

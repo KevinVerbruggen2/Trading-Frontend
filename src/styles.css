@@ -3,3 +3,50 @@ body {
   color: #ffffff;
   margin: 0;
 }
+
+form {
+  margin: 1rem auto;
+}
+
+label {
+  color: #e0e2e4;
+  margin-left: 0.5rem;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem
+}
+
+input {
+  width: 15rem;
+  max-width: 90vw;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 1rem;
+  color: #e5e6e6;
+  background-color: #3c4043;
+}
+
+.wide-input {
+  width: 30rem;
+}
+
+button {
+  color: #ffffff;
+  background-color: #3c4043;
+  border-radius: 0.2rem;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin: 0.5rem
+}
+
+button:disabled {
+  color: #999999;
+}

@@ -1,17 +1,23 @@
 <form [formGroup]="addStockForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <input
-      type="text"
-      formControlName="name"
-      class="form-control"
-      placeholder="Enter Name"
-    >
+    <p class="mb-1 ms-5">Add a Fonds / Stock / ETF with the precise <a href="https://www.test-aankoop.be/invest/beleggen/fondsen">Test-Aankoop name</a></p>
+    <div class="input-block">
+      <label>Name</label>
+      <input
+        type="text"
+        class="wide-input"
+        formControlName="name"
+        placeholder="Enter Precise Stock Name"
+      >
+    </div>
     <button
       type="submit"
-      class="btn btn-primary"
       [disabled]="addStockForm.invalid"
     >
       Add Stock
     </button>
+
   </div>
 </form>
+
+<app-test-aanoop-bulk-add></app-test-aanoop-bulk-add>
