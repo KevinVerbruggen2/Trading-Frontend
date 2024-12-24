@@ -33,6 +33,17 @@ input {
   background-color: #3c4043;
 }
 
+select {
+  width: 15rem;
+  max-width: 90vw;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 1rem;
+  color: #e5e6e6;
+  background-color: #3c4043;
+}
+
 .wide-input {
   width: 30rem;
 }
@@ -49,4 +60,30 @@ button {
 
 button:disabled {
   color: #999999;
+}
+
+/* Table */
+table {
+  margin: 1rem auto;
+  border-radius: 1rem;
+  background-color: #3c4043;
+}
+
+tr {
+  /*margin: 0.2rem 0.5rem;*/
+}
+
+td, th {
+  padding: 0.2rem 0.3rem;
+  text-align: start;
+  vertical-align: top;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+li {
+  white-space: nowrap;
 }

@@ -13,6 +13,10 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
+  getAllStocks(): Observable<StockInterface[]> {
+    return this.http.get<StockInterface[]>(this.url);
+  }
+
   //do the same as above but pu the param in body
   scrapeStockData(stockName: string): Observable<StockInterface> {
     let stockInterface: StockInterface = {

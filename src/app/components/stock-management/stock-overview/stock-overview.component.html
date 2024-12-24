@@ -1,2 +1,95 @@
-
 <button class="btn btn-secondary m-1" routerLink="/stock-management/add-stock">Add Stock</button>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Added As</th>
+    <th>Name</th>
+    <th>ISIN</th>
+    <th>Legal Form</th>
+    <th>Eu Passport</th>
+    <th>Launch Date</th>
+    <th>Category</th>
+    <th>Fund Size</th>
+    <th>Manager</th>
+    <th>Annual Management Cost</th>
+    <th>Ongoing Cost</th>
+    <th>1M</th>
+    <th>3M</th>
+    <th>6M</th>
+    <th>1Y</th>
+    <th>3Y</th>
+    <th>5Y</th>
+    <th>10Y</th>
+    <th>Risk</th>
+    <th>Volatility</th>
+    <th>Custom Rating</th>
+    <th>Opinion</th>
+    <th>Sector Weights</th>
+    <th>Country Weights</th>
+    <th>Currency Weights</th>
+    <th>Top Holdings</th>
+    <th>Created At</th>
+    <th>Updated At</th>
+    <th>ETF</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let stock of stocks">
+    <td>{{ stock.id }}</td>
+    <td>{{ stock.addedAs }}</td>
+    <td>{{ stock.name }}</td>
+    <td>{{ stock.isin }}</td>
+    <td>{{ stock.legalForm }}</td>
+    <td>{{ stock.hasEuropeanPassport }}</td>
+    <td>{{ stock.launchDate }}</td>
+    <td>{{ stock.category }}</td>
+    <td>{{ stock.fundSize }}</td>
+    <td>{{ stock.manager }}</td>
+    <td>{{ stock.annualManagementCost }}</td>
+    <td>{{ stock.ongoingCost }}</td>
+    <td>{{ stock.oneMonthReturn }}</td>
+    <td>{{ stock.threeMonthReturn }}</td>
+    <td>{{ stock.sixMonthReturn }}</td>
+    <td>{{ stock.oneYearReturn }}</td>
+    <td>{{ stock.threeYearAnnualReturn }}</td>
+    <td>{{ stock.fiveYearAnnualReturn }}</td>
+    <td>{{ stock.tenYearAnnualReturn }}</td>
+    <td>{{ stock.risk }}</td>
+    <td>{{ stock.volatility }}</td>
+    <td>{{ stock.customRating }}</td>
+    <td>{{ stock.opinion }}</td>
+    <td>
+      <ul>
+        <li *ngFor="let sector of stock.sectorWeights">
+          {{ sector.name }}: {{ sector.percent }}%
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li *ngFor="let country of stock.countryWeights">
+          {{ country.name }}: {{ country.percent }}%
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li *ngFor="let currency of stock.currencyWeights">
+          {{ currency.name }}: {{ currency.percent }}%
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li *ngFor="let holding of stock.topHoldings">
+          {{ holding.name }}: {{ holding.percent }}%
+        </li>
+      </ul>
+    </td>
+    <td>{{ stock.createdAt }}</td>
+    <td>{{ stock.updatedAt }}</td>
+    <td>{{ stock.etf }}</td>
+  </tr>
+  </tbody>
+</table>

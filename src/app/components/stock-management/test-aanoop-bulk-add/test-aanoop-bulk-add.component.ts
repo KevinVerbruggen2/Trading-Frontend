@@ -80,7 +80,6 @@ export class TestAanoopBulkAddComponent extends SubscriptionService {
     private stockService: StockService
   ) {
     super();
-    // Initialize the form with validators
     this.bulkAddForm = this.fb.group({
       numberOfStocks: ['10', [Validators.required, Validators.min(1)]],
       distributor: ['distributor_MeDirect', Validators.required], // Set MeDirect as default
@@ -100,7 +99,11 @@ export class TestAanoopBulkAddComponent extends SubscriptionService {
           {
             next: (response) => {
               console.log('Stock added successfully', response);
-              this.bulkAddForm.reset();
+              this. bulkAddForm = this.fb.group({
+                numberOfStocks: ['10', [Validators.required, Validators.min(1)]],
+                distributor: ['distributor_MeDirect', Validators.required], // Set MeDirect as default
+                currency: ['EUR', Validators.required] // Set EUR as default
+              });
             },
             error: (error) => {
               console.error('Error adding stock', error);
