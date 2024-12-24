@@ -74,9 +74,15 @@ tr {
 }
 
 td, th {
-  padding: 0.2rem 0.3rem;
+  padding: 0.2rem 0.5rem;
   text-align: start;
   vertical-align: top;
+}
+th {
+  border-bottom: 2px solid #5f6368;
+}
+td {
+  border-top: 1px solid #5f6368;
 }
 
 ul {

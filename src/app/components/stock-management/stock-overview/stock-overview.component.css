@@ -1,0 +1,45 @@
+.scrollable-list {
+  max-height: 6rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.scrollable-list::-webkit-scrollbar {
+  width: 4px; /* Very thin scrollbar */
+}
+
+.scrollable-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 2px;
+}
+
+/* Remove scrollbar arrows */
+.scrollable-list::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox scrollbar styling */
+.scrollable-list {
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
+
+.name-field {
+  display: flex;
+  width: 25rem;
+}
+
+th {
+  cursor: pointer;
+}
+
+table {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}

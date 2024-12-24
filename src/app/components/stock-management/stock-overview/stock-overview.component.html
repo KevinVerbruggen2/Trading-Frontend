@@ -1,95 +1,212 @@
 <button class="btn btn-secondary m-1" routerLink="/stock-management/add-stock">Add Stock</button>
+<form [formGroup]="filterForm">
+  <div class="form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="showDetailsCheckbox"
+      formControlName="showDetails"
+    >
+    <label class="form-check-label" for="showDetailsCheckbox">
+      Show Detailed Information
+    </label>
+  </div>
+</form>
 <table>
   <thead>
   <tr>
-    <th>ID</th>
-    <th>Added As</th>
-    <th>Name</th>
-    <th>ISIN</th>
-    <th>Legal Form</th>
-    <th>Eu Passport</th>
-    <th>Launch Date</th>
-    <th>Category</th>
-    <th>Fund Size</th>
-    <th>Manager</th>
-    <th>Annual Management Cost</th>
-    <th>Ongoing Cost</th>
-    <th>1M</th>
-    <th>3M</th>
-    <th>6M</th>
-    <th>1Y</th>
-    <th>3Y</th>
-    <th>5Y</th>
-    <th>10Y</th>
-    <th>Risk</th>
-    <th>Volatility</th>
-    <th>Custom Rating</th>
-    <th>Opinion</th>
-    <th>Sector Weights</th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('id')">
+      ID
+      <span *ngIf="getSortDirection('id') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('id') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('addedAs')">
+      Added As
+      <span *ngIf="getSortDirection('addedAs') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('addedAs') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('name')">
+      Name
+      <span *ngIf="getSortDirection('name') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('name') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('isin')">
+      ISIN
+      <span *ngIf="getSortDirection('isin') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('isin') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('etf')">
+      ETF
+      <span *ngIf="getSortDirection('etf') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('etf') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('legalForm')">
+      Legal Form
+      <span *ngIf="getSortDirection('legalForm') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('legalForm') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('hasEuropeanPassport')">
+      EU Passport
+      <span *ngIf="getSortDirection('hasEuropeanPassport') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('hasEuropeanPassport') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('launchDate')">
+      Launch Date
+      <span *ngIf="getSortDirection('launchDate') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('launchDate') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('category')">
+      Category
+      <span *ngIf="getSortDirection('category') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('category') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('fundSize')">
+      Fund Size
+      <span *ngIf="getSortDirection('fundSize') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('fundSize') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('manager')">
+      Manager
+      <span *ngIf="getSortDirection('manager') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('manager') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('annualManagementCost')">
+      Annual Cost
+      <span *ngIf="getSortDirection('annualManagementCost') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('annualManagementCost') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('ongoingCost')">
+      Ongoing Cost
+      <span *ngIf="getSortDirection('ongoingCost') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('ongoingCost') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('oneMonthReturn')">
+      1M
+      <span *ngIf="getSortDirection('oneMonthReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('oneMonthReturn') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('threeMonthReturn')">
+      3M
+      <span *ngIf="getSortDirection('threeMonthReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('threeMonthReturn') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('sixMonthReturn')">
+      6M
+      <span *ngIf="getSortDirection('sixMonthReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('sixMonthReturn') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('oneYearReturn')">
+      1Y
+      <span *ngIf="getSortDirection('oneYearReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('oneYearReturn') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('threeYearAnnualReturn')">
+      3Y
+      <span *ngIf="getSortDirection('threeYearAnnualReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('threeYearAnnualReturn') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('fiveYearAnnualReturn')">
+      5Y
+      <span *ngIf="getSortDirection('fiveYearAnnualReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('fiveYearAnnualReturn') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('tenYearAnnualReturn')">
+      10Y
+      <span *ngIf="getSortDirection('tenYearAnnualReturn') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('tenYearAnnualReturn') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('risk')">
+      Risk
+      <span *ngIf="getSortDirection('risk') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('risk') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('volatility')">
+      Volatility
+      <span *ngIf="getSortDirection('volatility') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('volatility') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('customRating')">
+      Custom Rating
+      <span *ngIf="getSortDirection('customRating') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('customRating') === 'desc'">↓</span>
+    </th>
+    <th (click)="sortBy('opinion')">
+      Opinion
+      <span *ngIf="getSortDirection('opinion') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('opinion') === 'desc'">↓</span>
+    </th>
     <th>Country Weights</th>
+    <th>Sector Weights</th>
     <th>Currency Weights</th>
     <th>Top Holdings</th>
-    <th>Created At</th>
-    <th>Updated At</th>
-    <th>ETF</th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('createdAt')">
+      Created At
+      <span *ngIf="getSortDirection('createdAt') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('createdAt') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('updatedAt')">
+      Updated At
+      <span *ngIf="getSortDirection('updatedAt') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('updatedAt') === 'desc'">↓</span>
+    </th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let stock of stocks">
-    <td>{{ stock.id }}</td>
-    <td>{{ stock.addedAs }}</td>
-    <td>{{ stock.name }}</td>
-    <td>{{ stock.isin }}</td>
-    <td>{{ stock.legalForm }}</td>
-    <td>{{ stock.hasEuropeanPassport }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.id }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.addedAs }}</td>
+    <td class="name-field">{{ stock.name }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.isin }}</td>
+    <td>{{ stock.etf }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.legalForm }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.hasEuropeanPassport }}</td>
     <td>{{ stock.launchDate }}</td>
     <td>{{ stock.category }}</td>
-    <td>{{ stock.fundSize }}</td>
-    <td>{{ stock.manager }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.fundSize }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.manager }}</td>
     <td>{{ stock.annualManagementCost }}</td>
     <td>{{ stock.ongoingCost }}</td>
-    <td>{{ stock.oneMonthReturn }}</td>
-    <td>{{ stock.threeMonthReturn }}</td>
-    <td>{{ stock.sixMonthReturn }}</td>
-    <td>{{ stock.oneYearReturn }}</td>
-    <td>{{ stock.threeYearAnnualReturn }}</td>
-    <td>{{ stock.fiveYearAnnualReturn }}</td>
-    <td>{{ stock.tenYearAnnualReturn }}</td>
-    <td>{{ stock.risk }}</td>
-    <td>{{ stock.volatility }}</td>
+    <td>{{ stock.oneMonthReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.threeMonthReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.sixMonthReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.oneYearReturn | number:'1.1-1' }}%</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.threeYearAnnualReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.fiveYearAnnualReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.tenYearAnnualReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.risk | number:'1.1-1' }}</td>
+    <td>{{ stock.volatility | number:'1.1-1' }}</td>
     <td>{{ stock.customRating }}</td>
     <td>{{ stock.opinion }}</td>
     <td>
-      <ul>
-        <li *ngFor="let sector of stock.sectorWeights">
-          {{ sector.name }}: {{ sector.percent }}%
-        </li>
-      </ul>
-    </td>
-    <td>
-      <ul>
+      <ul class="scrollable-list">
         <li *ngFor="let country of stock.countryWeights">
           {{ country.name }}: {{ country.percent }}%
         </li>
       </ul>
     </td>
     <td>
-      <ul>
+      <ul class="scrollable-list">
+        <li *ngFor="let sector of stock.sectorWeights">
+          {{ sector.name }}: {{ sector.percent }}%
+        </li>
+      </ul>
+    </td>
+    <td>
+      <ul class="scrollable-list">
         <li *ngFor="let currency of stock.currencyWeights">
           {{ currency.name }}: {{ currency.percent }}%
         </li>
       </ul>
     </td>
     <td>
-      <ul>
+      <ul class="scrollable-list">
         <li *ngFor="let holding of stock.topHoldings">
-          {{ holding.name }}: {{ holding.percent }}%
+          {{ holding.name | slice:0:30}}: {{ holding.percent }}%
         </li>
       </ul>
     </td>
-    <td>{{ stock.createdAt }}</td>
-    <td>{{ stock.updatedAt }}</td>
-    <td>{{ stock.etf }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.createdAt }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.updatedAt }}</td>
   </tr>
   </tbody>
 </table>
