@@ -29,6 +29,43 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
   filterForm!: FormGroup;
   currentSort: { field: SortKey, direction: 'asc' | 'desc' } | null = null;
 
+  checkedOptions = [
+    'True',
+    'False',
+    'Select'
+  ]
+
+  filters = {
+    favourite: 'Select',
+    name: '',
+    etf: 'Select',
+    startLaunchDate: '',
+    endLaunchDate: '',
+    category: '',
+    minOngoingCost: 0.0,
+    maxOngoingCost: 0.0,
+    minOneMonthReturn: 0.0,
+    maxOneMonthReturn: 0.0,
+    minThreeMonthReturn: 0.0,
+    maxThreeMonthReturn: 0.0,
+    minSixMonthReturn: 0.0,
+    maxSixMonthReturn: 0.0,
+    minOneYearReturn: 0.0,
+    maxOneYearReturn: 0.0,
+    minThreeYearAnnualReturn: 0.0,
+    maxThreeYearAnnualReturn: 0.0,
+    minFiveYearAnnualReturn: 0.0,
+    maxFiveYearAnnualReturn: 0.0,
+    minTenYearAnnualReturn: 0.0,
+    maxTenYearAnnualReturn: 0.0,
+    minRisk: 0.0,
+    maxRisk: 0.0,
+    minVolatility: 0.0,
+    maxVolatility: 0.0,
+    minCustomRating: 0.0,
+    maxCustomRating: 0.0,
+  }
+
   private defaultDescendingFields: SortKey[] = [
     'ongoingCost',
     'oneMonthReturn',
@@ -45,8 +82,37 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
 
   constructor(private stockService: StockService, private fb: FormBuilder) {
     super();
+
     this.filterForm = this.fb.group({
-      showDetails: [false] // Default to false
+      showDetails: [false],
+      favourite: [''],
+      name: [''],
+      etf: [''],
+      startLaunchDate: [''],
+      endLaunchDate: [''],
+      category: [''],
+      minOngoingCost: [0.0],
+      maxOngoingCost: [0.0],
+      minOneMonthReturn: [0.0],
+      maxOneMonthReturn: [0.0],
+      minThreeMonthReturn: [0.0],
+      maxThreeMonthReturn: [0.0],
+      minSixMonthReturn: [0.0],
+      maxSixMonthReturn: [0.0],
+      minOneYearReturn: [0.0],
+      maxOneYearReturn: [0.0],
+      minThreeYearAnnualReturn: [0.0],
+      maxThreeYearAnnualReturn: [0.0],
+      minFiveYearAnnualReturn: [0.0],
+      maxFiveYearAnnualReturn: [0.0],
+      minTenYearAnnualReturn: [0.0],
+      maxTenYearAnnualReturn: [0.0],
+      minRisk: [0.0],
+      maxRisk: [0.0],
+      minVolatility: [0.0],
+      maxVolatility: [0.0],
+      minCustomRating: [0.0],
+      maxCustomRating: [0.0]
     });
   }
 

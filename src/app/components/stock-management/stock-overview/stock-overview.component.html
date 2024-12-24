@@ -1,16 +1,181 @@
-<button class="btn btn-secondary m-1" routerLink="/stock-management/add-stock">Add Stock</button>
+
+
 <form [formGroup]="filterForm">
-  <div class="form-check">
-    <input
-      type="checkbox"
-      class="form-check-input"
-      id="showDetailsCheckbox"
-      formControlName="showDetails"
-    >
-    <label class="form-check-label" for="showDetailsCheckbox">
-      Show Detailed Information
-    </label>
+<!--  filters = {-->
+<!--  favourite: '',-->
+<!--  name: '',-->
+<!--  etf: '',-->
+<!--  startLaunchDate: '',-->
+<!--  endLaunchDate: '',-->
+<!--  category: '',-->
+<!--  minOngoingCost: 0.0,-->
+<!--  maxOngoingCost: 0.0,-->
+<!--  minOneMonthReturn: 0.0,-->
+<!--  maxOneMonthReturn: 0.0,-->
+<!--  minThreeMonthReturn: 0.0,-->
+<!--  maxThreeMonthReturn: 0.0,-->
+<!--  minSixMonthReturn: 0.0,-->
+<!--  maxSixMonthReturn: 0.0,-->
+<!--  minOneYearReturn: 0.0,-->
+<!--  maxOneYearReturn: 0.0,-->
+<!--  minThreeYearAnnualReturn: 0.0,-->
+<!--  maxThreeYearAnnualReturn: 0.0,-->
+<!--  minFiveYearAnnualReturn: 0.0,-->
+<!--  maxFiveYearAnnualReturn: 0.0,-->
+<!--  minTenYearAnnualReturn: 0.0,-->
+<!--  maxTenYearAnnualReturn: 0.0,-->
+<!--  minRisk: 0.0,-->
+<!--  maxRisk: 0.0,-->
+<!--  minVolatility: 0.0,-->
+<!--  maxVolatility: 0.0,-->
+<!--  minCustomRating: 0.0,-->
+<!--  maxCustomRating: 0.0,-->
+<!--  }-->
+  <div class="d-flex justify-content-center mb-2">
+    <button class="btn btn-secondary m-1" routerLink="/stock-management/add-stock">Add Stock</button>
+    <div class="form-check">
+      <label class="form-check-label" for="showDetailsCheckbox">
+        Detailed Info
+      </label>
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="showDetailsCheckbox"
+        formControlName="showDetails"
+      >
+    </div>
   </div>
+
+  <div id="first-filters" class="d-flex justify-content-center flex-wrap">
+
+    <div class="input-block">
+      <label>Favourite</label>
+      <select class="very-small-input" formControlName="favourite">
+        <option *ngFor="let option of checkedOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+    <div class="input-block">
+      <label>ETF</label>
+      <select class="very-small-input" formControlName="etf">
+        <option *ngFor="let option of checkedOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+    <div class="input-block">
+      <label>Name</label>
+      <input type="text" formControlName="name" placeholder="Enter Name">
+    </div>
+    <div class="input-block">
+      <label>Category</label>
+      <input type="text" formControlName="category" placeholder="Enter Category">
+    </div>
+    <div class="input-block">
+      <label>Start Launch Date</label>
+      <input type="date" formControlName="startLaunchDate">
+    </div>
+    <div class="input-block">
+      <label>End Launch Date</label>
+      <input type="date" formControlName="endLaunchDate">
+    </div>
+  </div>
+  <div id="second-filters" class="d-flex justify-content-center flex-wrap">
+    <div class="input-block">
+      <label>Min Ongoing Cost</label>
+      <input class="small-input" type="number" formControlName="minOngoingCost">
+    </div>
+    <div class="input-block">
+      <label>Max Ongoing Cost</label>
+      <input class="small-input" type="number" formControlName="maxOngoingCost">
+    </div>
+    <div class="input-block">
+      <label>Min Risk</label>
+      <input class="small-input" type="number" formControlName="minRisk">
+    </div>
+    <div class="input-block">
+      <label>Max Risk</label>
+      <input class="small-input" type="number" formControlName="maxRisk">
+    </div>
+    <div class="input-block">
+      <label>Min Volatility</label>
+      <input class="small-input" type="number" formControlName="minVolatility">
+    </div>
+    <div class="input-block">
+      <label>Max Volatility</label>
+      <input class="small-input" type="number" formControlName="maxVolatility">
+    </div>
+    <div class="input-block">
+      <label>Min Custom Rating</label>
+      <input class="small-input" type="number" formControlName="minCustomRating">
+    </div>
+    <div class="input-block">
+      <label>Max Custom Rating</label>
+      <input class="small-input" type="number" formControlName="maxCustomRating">
+    </div>
+  </div>
+  <div id="third-filters" class="d-flex justify-content-center flex-wrap">
+    <div class="input-block">
+      <label>Min 1M %</label>
+      <input class="very-small-input" type="number" formControlName="minOneMonthReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 1M %</label>
+      <input class="very-small-input" type="number" formControlName="maxOneMonthReturn">
+    </div>
+    <div class="input-block">
+      <label>Min 3M %</label>
+      <input class="very-small-input" type="number" formControlName="minThreeMonthReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 3M %</label>
+      <input class="very-small-input" type="number" formControlName="maxThreeMonthReturn">
+    </div>
+    <div class="input-block">
+      <label>Min 6M %</label>
+      <input class="very-small-input" type="number" formControlName="minSixMonthReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 6M %</label>
+      <input class="very-small-input" type="number" formControlName="maxSixMonthReturn">
+    </div>
+    <div class="input-block">
+      <label>Min 1Y %</label>
+      <input class="very-small-input" type="number" formControlName="minOneYearReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 1Y %</label>
+      <input class="very-small-input" type="number" formControlName="maxOneYearReturn">
+    </div>
+    <div class="input-block">
+      <label>Min 3Y %</label>
+      <input class="very-small-input" type="number" formControlName="minThreeYearAnnualReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 3Y %</label>
+      <input class="very-small-input" type="number" formControlName="maxThreeYearAnnualReturn">
+    </div>
+    <div class="input-block">
+      <label>Min 5Y %</label>
+      <input class="very-small-input" type="number" formControlName="minFiveYearAnnualReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 5Y %</label>
+      <input class="very-small-input" type="number" formControlName="maxFiveYearAnnualReturn">
+    </div>
+    <div class="input-block">
+      <label>Min 10Y %</label>
+      <input class="very-small-input" type="number" formControlName="minTenYearAnnualReturn">
+    </div>
+    <div class="input-block">
+      <label>Max 10Y %</label>
+      <input class="very-small-input" type="number" formControlName="maxTenYearAnnualReturn">
+    </div>
+  </div>
+
+
+
 </form>
 <table>
   <thead>
@@ -25,6 +190,11 @@
       <span *ngIf="getSortDirection('addedAs') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('addedAs') === 'desc'">↓</span>
     </th>
+    <th (click)="sortBy('isFavourite')">
+      Favourite
+      <span *ngIf="getSortDirection('isFavourite') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('isFavourite') === 'desc'">↓</span>
+    </th>
     <th (click)="sortBy('name')">
       Name
       <span *ngIf="getSortDirection('name') === 'asc'">↑</span>
@@ -34,6 +204,11 @@
       ISIN
       <span *ngIf="getSortDirection('isin') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('isin') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="sortBy('distributor')">
+      Distributor
+      <span *ngIf="getSortDirection('distributor') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('distributor') === 'desc'">↓</span>
     </th>
     <th (click)="sortBy('etf')">
       ETF
@@ -155,8 +330,10 @@
   <tr *ngFor="let stock of stocks">
     <td *ngIf="showDetails.valueOf()">{{ stock.id }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.addedAs }}</td>
+    <td>{{ stock.isFavourite }}</td>
     <td class="name-field">{{ stock.name }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.isin }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.distributor }}</td>
     <td>{{ stock.etf }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.legalForm }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.hasEuropeanPassport }}</td>

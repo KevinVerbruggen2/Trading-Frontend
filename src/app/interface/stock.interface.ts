@@ -29,6 +29,8 @@ export interface StockInterface {
   createdAt?: string;
   updatedAt?: string;
   etf?: boolean;
+  distributor?: string;
+  isFavourite?: boolean;
 }
 
 export interface SectorWeight {

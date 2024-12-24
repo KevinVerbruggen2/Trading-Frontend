@@ -33,6 +33,18 @@ input {
   background-color: #3c4043;
 }
 
+/* input type checkbox */
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  color: #9aa0a6;
+}
+
+input[type="checkbox"]:checked {
+  color: #8ab4f8;
+}
+
 select {
   width: 15rem;
   max-width: 90vw;
@@ -46,6 +58,13 @@ select {
 
 .wide-input {
   width: 30rem;
+}
+
+.very-small-input {
+  width: 6rem;
+}
+.small-input {
+  width: 10rem;
 }
 
 button {
