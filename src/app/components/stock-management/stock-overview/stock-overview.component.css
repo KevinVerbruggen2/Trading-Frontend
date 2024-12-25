@@ -33,6 +33,7 @@
 .name-field {
   display: flex;
   width: 25rem;
+  cursor: pointer;
 }
 
 th {

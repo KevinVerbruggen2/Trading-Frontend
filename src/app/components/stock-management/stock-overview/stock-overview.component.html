@@ -1,36 +1,4 @@
-
-
 <form [formGroup]="filterForm">
-<!--  filters = {-->
-<!--  favourite: '',-->
-<!--  name: '',-->
-<!--  etf: '',-->
-<!--  startLaunchDate: '',-->
-<!--  endLaunchDate: '',-->
-<!--  category: '',-->
-<!--  minOngoingCost: 0.0,-->
-<!--  maxOngoingCost: 0.0,-->
-<!--  minOneMonthReturn: 0.0,-->
-<!--  maxOneMonthReturn: 0.0,-->
-<!--  minThreeMonthReturn: 0.0,-->
-<!--  maxThreeMonthReturn: 0.0,-->
-<!--  minSixMonthReturn: 0.0,-->
-<!--  maxSixMonthReturn: 0.0,-->
-<!--  minOneYearReturn: 0.0,-->
-<!--  maxOneYearReturn: 0.0,-->
-<!--  minThreeYearAnnualReturn: 0.0,-->
-<!--  maxThreeYearAnnualReturn: 0.0,-->
-<!--  minFiveYearAnnualReturn: 0.0,-->
-<!--  maxFiveYearAnnualReturn: 0.0,-->
-<!--  minTenYearAnnualReturn: 0.0,-->
-<!--  maxTenYearAnnualReturn: 0.0,-->
-<!--  minRisk: 0.0,-->
-<!--  maxRisk: 0.0,-->
-<!--  minVolatility: 0.0,-->
-<!--  maxVolatility: 0.0,-->
-<!--  minCustomRating: 0.0,-->
-<!--  maxCustomRating: 0.0,-->
-<!--  }-->
   <div class="d-flex justify-content-center mb-2">
     <button class="btn btn-secondary m-1" routerLink="/stock-management/add-stock">Add Stock</button>
     <div class="form-check">
@@ -117,195 +85,199 @@
   </div>
   <div id="third-filters" class="d-flex justify-content-center flex-wrap">
     <div class="input-block">
-      <label>Min 1M %</label>
+      <label>Min 1M</label>
       <input class="very-small-input" type="number" formControlName="minOneMonthReturn">
     </div>
     <div class="input-block">
-      <label>Max 1M %</label>
+      <label>Max 1M</label>
       <input class="very-small-input" type="number" formControlName="maxOneMonthReturn">
     </div>
     <div class="input-block">
-      <label>Min 3M %</label>
+      <label>Min 3M</label>
       <input class="very-small-input" type="number" formControlName="minThreeMonthReturn">
     </div>
     <div class="input-block">
-      <label>Max 3M %</label>
+      <label>Max 3M</label>
       <input class="very-small-input" type="number" formControlName="maxThreeMonthReturn">
     </div>
     <div class="input-block">
-      <label>Min 6M %</label>
+      <label>Min 6M</label>
       <input class="very-small-input" type="number" formControlName="minSixMonthReturn">
     </div>
     <div class="input-block">
-      <label>Max 6M %</label>
+      <label>Max 6M</label>
       <input class="very-small-input" type="number" formControlName="maxSixMonthReturn">
     </div>
     <div class="input-block">
-      <label>Min 1Y %</label>
+      <label>Min 1Y</label>
       <input class="very-small-input" type="number" formControlName="minOneYearReturn">
     </div>
     <div class="input-block">
-      <label>Max 1Y %</label>
+      <label>Max 1Y</label>
       <input class="very-small-input" type="number" formControlName="maxOneYearReturn">
     </div>
     <div class="input-block">
-      <label>Min 3Y %</label>
+      <label>Min 3Y</label>
       <input class="very-small-input" type="number" formControlName="minThreeYearAnnualReturn">
     </div>
     <div class="input-block">
-      <label>Max 3Y %</label>
+      <label>Max 3Y</label>
       <input class="very-small-input" type="number" formControlName="maxThreeYearAnnualReturn">
     </div>
     <div class="input-block">
-      <label>Min 5Y %</label>
+      <label>Min 5Y</label>
       <input class="very-small-input" type="number" formControlName="minFiveYearAnnualReturn">
     </div>
     <div class="input-block">
-      <label>Max 5Y %</label>
+      <label>Max 5Y</label>
       <input class="very-small-input" type="number" formControlName="maxFiveYearAnnualReturn">
     </div>
     <div class="input-block">
-      <label>Min 10Y %</label>
+      <label>Min 10Y</label>
       <input class="very-small-input" type="number" formControlName="minTenYearAnnualReturn">
     </div>
     <div class="input-block">
-      <label>Max 10Y %</label>
+      <label>Max 10Y</label>
       <input class="very-small-input" type="number" formControlName="maxTenYearAnnualReturn">
     </div>
   </div>
-
-
-
 </form>
+<div class="d-flex justify-content-center flex-wrap" *ngIf="getActiveFilters().length > 0">
+  <h5>Active Filters: </h5>
+  <div *ngFor="let filter of getActiveFilters()">
+    <button (click)="resetFilter(filter)">{{filter}}</button>
+  </div>
+</div>
+<h5 class="ms-auto me-auto text-center">{{ stocks.length }} Results</h5>
 <table>
   <thead>
   <tr>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('id')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('id')">
       ID
       <span *ngIf="getSortDirection('id') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('id') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('addedAs')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('addedAs')">
       Added As
       <span *ngIf="getSortDirection('addedAs') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('addedAs') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('isFavourite')">
+    <th (click)="setSortBy('isFavourite')">
       Favourite
       <span *ngIf="getSortDirection('isFavourite') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('isFavourite') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('name')">
+    <th (click)="setSortBy('name')">
       Name
       <span *ngIf="getSortDirection('name') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('name') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('isin')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('isin')">
       ISIN
       <span *ngIf="getSortDirection('isin') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('isin') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('distributor')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('distributor')">
       Distributor
       <span *ngIf="getSortDirection('distributor') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('distributor') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('etf')">
+    <th (click)="setSortBy('etf')">
       ETF
       <span *ngIf="getSortDirection('etf') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('etf') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('legalForm')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('legalForm')">
       Legal Form
       <span *ngIf="getSortDirection('legalForm') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('legalForm') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('hasEuropeanPassport')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('hasEuropeanPassport')">
       EU Passport
       <span *ngIf="getSortDirection('hasEuropeanPassport') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('hasEuropeanPassport') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('launchDate')">
+    <th (click)="setSortBy('launchDate')">
       Launch Date
       <span *ngIf="getSortDirection('launchDate') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('launchDate') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('category')">
+    <th (click)="setSortBy('category')">
       Category
       <span *ngIf="getSortDirection('category') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('category') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('fundSize')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('fundSize')">
       Fund Size
       <span *ngIf="getSortDirection('fundSize') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('fundSize') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('manager')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('manager')">
       Manager
       <span *ngIf="getSortDirection('manager') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('manager') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('annualManagementCost')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('annualManagementCost')">
       Annual Cost
       <span *ngIf="getSortDirection('annualManagementCost') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('annualManagementCost') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('ongoingCost')">
+    <th (click)="setSortBy('ongoingCost')">
       Ongoing Cost
       <span *ngIf="getSortDirection('ongoingCost') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('ongoingCost') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('oneMonthReturn')">
+    <th (click)="setSortBy('oneMonthReturn')">
       1M
       <span *ngIf="getSortDirection('oneMonthReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('oneMonthReturn') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('threeMonthReturn')">
+    <th (click)="setSortBy('threeMonthReturn')">
       3M
       <span *ngIf="getSortDirection('threeMonthReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('threeMonthReturn') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('sixMonthReturn')">
+    <th (click)="setSortBy('sixMonthReturn')">
       6M
       <span *ngIf="getSortDirection('sixMonthReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('sixMonthReturn') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('oneYearReturn')">
+    <th (click)="setSortBy('oneYearReturn')">
       1Y
       <span *ngIf="getSortDirection('oneYearReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('oneYearReturn') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('threeYearAnnualReturn')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('threeYearAnnualReturn')">
       3Y
       <span *ngIf="getSortDirection('threeYearAnnualReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('threeYearAnnualReturn') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('fiveYearAnnualReturn')">
+    <th (click)="setSortBy('fiveYearAnnualReturn')">
       5Y
       <span *ngIf="getSortDirection('fiveYearAnnualReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('fiveYearAnnualReturn') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('tenYearAnnualReturn')">
+    <th (click)="setSortBy('tenYearAnnualReturn')">
       10Y
       <span *ngIf="getSortDirection('tenYearAnnualReturn') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('tenYearAnnualReturn') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('risk')">
+    <th (click)="setSortBy('risk')">
       Risk
       <span *ngIf="getSortDirection('risk') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('risk') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('volatility')">
+    <th (click)="setSortBy('volatility')">
       Volatility
       <span *ngIf="getSortDirection('volatility') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('volatility') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('customRating')">
+    <th (click)="setSortBy('customRating')">
       Custom Rating
       <span *ngIf="getSortDirection('customRating') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('customRating') === 'desc'">↓</span>
     </th>
-    <th (click)="sortBy('opinion')">
+    <th (click)="setSortBy('opinion')">
       Opinion
       <span *ngIf="getSortDirection('opinion') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('opinion') === 'desc'">↓</span>
@@ -314,12 +286,12 @@
     <th>Sector Weights</th>
     <th>Currency Weights</th>
     <th>Top Holdings</th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('createdAt')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('createdAt')">
       Created At
       <span *ngIf="getSortDirection('createdAt') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('createdAt') === 'desc'">↓</span>
     </th>
-    <th *ngIf="showDetails.valueOf()" (click)="sortBy('updatedAt')">
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('updatedAt')">
       Updated At
       <span *ngIf="getSortDirection('updatedAt') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('updatedAt') === 'desc'">↓</span>
@@ -331,7 +303,7 @@
     <td *ngIf="showDetails.valueOf()">{{ stock.id }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.addedAs }}</td>
     <td>{{ stock.isFavourite }}</td>
-    <td class="name-field">{{ stock.name }}</td>
+    <td class="name-field"><a href="{{ getFullUrl(stock.name) }}">{{ stock.name }}</a></td>
     <td *ngIf="showDetails.valueOf()">{{ stock.isin }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.distributor }}</td>
     <td>{{ stock.etf }}</td>
@@ -341,15 +313,15 @@
     <td>{{ stock.category }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.fundSize }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.manager }}</td>
-    <td>{{ stock.annualManagementCost }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.annualManagementCost }}</td>
     <td>{{ stock.ongoingCost }}</td>
-    <td>{{ stock.oneMonthReturn | number:'1.1-1' }}%</td>
-    <td>{{ stock.threeMonthReturn | number:'1.1-1' }}%</td>
-    <td>{{ stock.sixMonthReturn | number:'1.1-1' }}%</td>
-    <td>{{ stock.oneYearReturn | number:'1.1-1' }}%</td>
-    <td *ngIf="showDetails.valueOf()">{{ stock.threeYearAnnualReturn | number:'1.1-1' }}%</td>
-    <td>{{ stock.fiveYearAnnualReturn | number:'1.1-1' }}%</td>
-    <td>{{ stock.tenYearAnnualReturn | number:'1.1-1' }}%</td>
+    <td>{{ stock.oneMonthReturn | number:'1.1-1' }}</td>
+    <td>{{ stock.threeMonthReturn | number:'1.1-1' }}</td>
+    <td>{{ stock.sixMonthReturn | number:'1.1-1' }}</td>
+    <td>{{ stock.oneYearReturn | number:'1.1-1' }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.threeYearAnnualReturn | number:'1.1-1' }}</td>
+    <td>{{ stock.fiveYearAnnualReturn | number:'1.1-1' }}</td>
+    <td>{{ stock.tenYearAnnualReturn | number:'1.1-1' }}</td>
     <td>{{ stock.risk | number:'1.1-1' }}</td>
     <td>{{ stock.volatility | number:'1.1-1' }}</td>
     <td>{{ stock.customRating }}</td>
@@ -357,28 +329,28 @@
     <td>
       <ul class="scrollable-list">
         <li *ngFor="let country of stock.countryWeights">
-          {{ country.name }}: {{ country.percent }}%
+          {{ country.name }}: {{ country.percent }}
         </li>
       </ul>
     </td>
     <td>
       <ul class="scrollable-list">
         <li *ngFor="let sector of stock.sectorWeights">
-          {{ sector.name }}: {{ sector.percent }}%
+          {{ sector.name }}: {{ sector.percent }}
         </li>
       </ul>
     </td>
     <td>
       <ul class="scrollable-list">
         <li *ngFor="let currency of stock.currencyWeights">
-          {{ currency.name }}: {{ currency.percent }}%
+          {{ currency.name }}: {{ currency.percent }}
         </li>
       </ul>
     </td>
     <td>
       <ul class="scrollable-list">
         <li *ngFor="let holding of stock.topHoldings">
-          {{ holding.name | slice:0:30}}: {{ holding.percent }}%
+          {{ holding.name | slice:0:30}}: {{ holding.percent }}
         </li>
       </ul>
     </td>
