@@ -15,7 +15,6 @@
   </div>
 
   <div id="first-filters" class="d-flex justify-content-center flex-wrap">
-
     <div class="input-block">
       <label>Favourite</label>
       <select class="very-small-input" formControlName="favourite">
@@ -24,6 +23,7 @@
         </option>
       </select>
     </div>
+
     <div class="input-block">
       <label>ETF</label>
       <select class="very-small-input" formControlName="etf">
@@ -32,18 +32,27 @@
         </option>
       </select>
     </div>
+
     <div class="input-block">
       <label>Name</label>
       <input type="text" formControlName="name" placeholder="Enter Name">
     </div>
+
     <div class="input-block">
       <label>Category</label>
       <input type="text" formControlName="category" placeholder="Enter Category">
     </div>
+
+    <div class="input-block">
+      <label>Distributor</label>
+      <input type="text" formControlName="distributor" placeholder="Enter Distributor">
+    </div>
+
     <div class="input-block">
       <label>Start Launch Date</label>
       <input type="date" formControlName="startLaunchDate">
     </div>
+
     <div class="input-block">
       <label>End Launch Date</label>
       <input type="date" formControlName="endLaunchDate">
@@ -152,16 +161,6 @@
 <table>
   <thead>
   <tr>
-    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('id')">
-      ID
-      <span *ngIf="getSortDirection('id') === 'asc'">↑</span>
-      <span *ngIf="getSortDirection('id') === 'desc'">↓</span>
-    </th>
-    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('addedAs')">
-      Added As
-      <span *ngIf="getSortDirection('addedAs') === 'asc'">↑</span>
-      <span *ngIf="getSortDirection('addedAs') === 'desc'">↓</span>
-    </th>
     <th (click)="setSortBy('isFavourite')">
       Favourite
       <span *ngIf="getSortDirection('isFavourite') === 'asc'">↑</span>
@@ -296,12 +295,20 @@
       <span *ngIf="getSortDirection('updatedAt') === 'asc'">↑</span>
       <span *ngIf="getSortDirection('updatedAt') === 'desc'">↓</span>
     </th>
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('id')">
+      ID
+      <span *ngIf="getSortDirection('id') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('id') === 'desc'">↓</span>
+    </th>
+    <th *ngIf="showDetails.valueOf()" (click)="setSortBy('addedAs')">
+      Added As
+      <span *ngIf="getSortDirection('addedAs') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('addedAs') === 'desc'">↓</span>
+    </th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let stock of stocks">
-    <td *ngIf="showDetails.valueOf()">{{ stock.id }}</td>
-    <td *ngIf="showDetails.valueOf()">{{ stock.addedAs }}</td>
     <td>{{ stock.isFavourite }}</td>
     <td class="name-field"><a href="{{ getFullUrl(stock.name) }}">{{ stock.name }}</a></td>
     <td *ngIf="showDetails.valueOf()">{{ stock.isin }}</td>
@@ -356,6 +363,8 @@
     </td>
     <td *ngIf="showDetails.valueOf()">{{ stock.createdAt }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.updatedAt }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.id }}</td>
+    <td *ngIf="showDetails.valueOf()">{{ stock.addedAs }}</td>
   </tr>
   </tbody>
 </table>

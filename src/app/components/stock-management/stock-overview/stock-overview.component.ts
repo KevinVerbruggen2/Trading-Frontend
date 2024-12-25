@@ -43,6 +43,7 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
     startLaunchDate: '',
     endLaunchDate: '',
     category: '',
+    distributor: '',
     minOngoingCost: 0.0,
     maxOngoingCost: 0.0,
     minOneMonthReturn: 0.0,
@@ -94,6 +95,9 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
       this.updateFilters();
       this.applyFilters();
     });
+
+    // set distributor
+    this.filterForm.get('distributor')!.setValue('MeDirect');
   }
 
   get showDetails(): boolean {
@@ -128,6 +132,9 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
     }
     if (this.filters.category) {
       filteredStocks = filteredStocks.filter(stock => stock.category?.toLowerCase().includes(this.filters.category.toLowerCase()));
+    }
+    if (this.filters.distributor) {
+      filteredStocks = filteredStocks.filter(stock => stock.distributor?.toLowerCase().includes(this.filters.distributor.toLowerCase()));
     }
     if (this.filters.startLaunchDate) {
       filteredStocks = filteredStocks.filter(stock => stock.launchDate && new Date(stock.launchDate) >= new Date(this.filters.startLaunchDate));
@@ -283,6 +290,7 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
       startLaunchDate: [''],
       endLaunchDate: [''],
       category: [''],
+      distributor: ['MeDirect'],
       minOngoingCost: [0.0],
       maxOngoingCost: [0.0],
       minOneMonthReturn: [0.0],
@@ -315,6 +323,7 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
     this.filters.startLaunchDate = this.filterForm.get('startLaunchDate')!.value;
     this.filters.endLaunchDate = this.filterForm.get('endLaunchDate')!.value;
     this.filters.category = this.filterForm.get('category')!.value;
+    this.filters.distributor = this.filterForm.get('distributor')!.value;
     this.filters.minOngoingCost = this.filterForm.get('minOngoingCost')!.value;
     this.filters.maxOngoingCost = this.filterForm.get('maxOngoingCost')!.value;
     this.filters.minOneMonthReturn = this.filterForm.get('minOneMonthReturn')!.value;
