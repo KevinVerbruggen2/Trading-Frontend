@@ -34,4 +34,12 @@ export class StockService {
     return this.http.post<StockInterface[]>(`${this.url}/scrape/bulk`, params);
   }
 
+  setFavourite(stock: StockInterface): Observable<StockInterface> {
+    let params = {
+      stockId: stock.id,
+      favourite: stock.favourite
+    }
+    return this.http.put<StockInterface>(`${this.url}/favourite`, params);
+  }
+
 }

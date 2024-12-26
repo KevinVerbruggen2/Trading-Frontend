@@ -161,10 +161,10 @@
 <table>
   <thead>
   <tr>
-    <th (click)="setSortBy('isFavourite')">
+    <th (click)="setSortBy('favourite')">
       Favourite
-      <span *ngIf="getSortDirection('isFavourite') === 'asc'">↑</span>
-      <span *ngIf="getSortDirection('isFavourite') === 'desc'">↓</span>
+      <span *ngIf="getSortDirection('favourite') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('favourite') === 'desc'">↓</span>
     </th>
     <th (click)="setSortBy('name')">
       Name
@@ -309,7 +309,8 @@
   </thead>
   <tbody>
   <tr *ngFor="let stock of stocks">
-    <td>{{ stock.isFavourite }}</td>
+    <td class="clickablle" *ngIf="stock.favourite" (click)="setFavourite(stock)">{{ stock.favourite }}</td>
+    <td class="clickablle" *ngIf="!stock.favourite" (click)="setFavourite(stock)"></td>
     <td class="name-field"><a href="{{ getFullUrl(stock.name) }}">{{ stock.name }}</a></td>
     <td *ngIf="showDetails.valueOf()">{{ stock.isin }}</td>
     <td *ngIf="showDetails.valueOf()">{{ stock.distributor }}</td>

@@ -112,3 +112,7 @@ ul {
 li {
   white-space: nowrap;
 }
+
+.clickablle {
+  cursor: pointer;
+}

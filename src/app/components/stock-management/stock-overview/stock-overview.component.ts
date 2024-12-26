@@ -37,7 +37,7 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
   ]
 
   filters = {
-    favourite: 'Select',
+    isFavourite: 'Select',
     name: '',
     etf: 'Select',
     startLaunchDate: '',
@@ -69,6 +69,7 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
   }
 
   private defaultDescendingFields: SortKey[] = [
+    'favourite',
     'ongoingCost',
     'oneMonthReturn',
     'threeMonthReturn',
@@ -117,11 +118,11 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
 
   applyFilters(): void {
     let filteredStocks = this.allStocks();
-    if (this.filters.favourite !== 'Select' && this.filters.favourite !== '') {
-      if (this.filters.favourite === 'True') {
-        filteredStocks = filteredStocks.filter(stock => stock.isFavourite);
+    if (this.filters.isFavourite !== 'Select' && this.filters.isFavourite !== '') {
+      if (this.filters.isFavourite === 'True') {
+        filteredStocks = filteredStocks.filter(stock => stock.favourite);
       } else {
-        filteredStocks = filteredStocks.filter(stock => stock.isFavourite === undefined || !stock.isFavourite);
+        filteredStocks = filteredStocks.filter(stock => stock.favourite === undefined || !stock.favourite);
       }
     }
     if (this.filters.etf !== 'Select' && this.filters.etf !== '') {
@@ -317,7 +318,7 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
   }
 
   private updateFilters() {
-    this.filters.favourite = this.filterForm.get('favourite')!.value;
+    this.filters.isFavourite = this.filterForm.get('favourite')!.value;
     this.filters.name = this.filterForm.get('name')!.value;
     this.filters.etf = this.filterForm.get('etf')!.value;
     this.filters.startLaunchDate = this.filterForm.get('startLaunchDate')!.value;
@@ -346,7 +347,6 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
     this.filters.maxVolatility = this.filterForm.get('maxVolatility')!.value;
     this.filters.minCustomRating = this.filterForm.get('minCustomRating')!.value;
     this.filters.maxCustomRating = this.filterForm.get('maxCustomRating')!.value;
-    console.log(this.filters)
   }
 
   protected readonly getFullUrl = getFullUrl;
@@ -366,5 +366,26 @@ export class StockOverviewComponent extends SubscriptionService implements OnIni
     // get everything before first : in name
     let key = name.split(':')[0].trim();
     this.filterForm.get(key)?.reset();
+  }
+
+  setFavourite(stock: StockInterface) {
+    if (stock.favourite === undefined || stock.favourite === null || !stock.favourite) {
+      stock.favourite = true;
+    } else {
+      stock.favourite = false;
+    }
+    this.addSubscription(this.stockService.setFavourite(stock).subscribe({
+        next: () => {
+          this.allStocks().forEach(s => {
+            if (s.id === stock.id) {
+              s.favourite = stock.favourite;
+            }
+          });
+        },
+        error: (error) => {
+          console.error('Error setting favourite:', error);
+        }
+      }
+    ));
   }
 }

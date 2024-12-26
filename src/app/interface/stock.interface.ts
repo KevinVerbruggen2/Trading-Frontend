@@ -30,7 +30,7 @@ export interface StockInterface {
   updatedAt?: string;
   etf?: boolean;
   distributor?: string;
-  isFavourite?: boolean;
+  favourite?: boolean;
 }
 
 export interface SectorWeight {
