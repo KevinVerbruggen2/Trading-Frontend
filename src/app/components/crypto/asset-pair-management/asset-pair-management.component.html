@@ -1,0 +1,108 @@
+<form [formGroup]="filterForm">
+  <div class="d-flex justify-content-center mb-2">
+    <div class="input-block">
+      <label>Base Currency</label>
+      <input type="text" formControlName="base" placeholder="Enter Base Currency">
+    </div>
+    <div class="input-block">
+      <label>Quote Currency</label>
+      <input type="text" formControlName="quote" placeholder="Enter Quote Currency">
+    </div>
+    <div class="form-check">
+      <label class="form-check-label" for="favouriteCheckbox">
+        Favourite Pairs
+      </label>
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="favouriteCheckbox"
+        formControlName="favourite"
+      >
+    </div>
+    <div class="form-check">
+      <label class="form-check-label" for="activeMonitorCheckbox">
+        Actively Monitored
+      </label>
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="activeMonitorCheckbox"
+        formControlName="activelyMonitor"
+      >
+    </div>
+  </div>
+</form>
+
+<h5 class="ms-auto me-auto text-center">{{ assetPairs.length }} Results</h5>
+
+<table>
+  <thead>
+  <tr>
+    <th (click)="setSortBy('favourite')">
+      Favourite
+      <span *ngIf="getSortDirection('favourite') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('favourite') === 'desc'">↓</span>
+    </th>
+    <th (click)="setSortBy('altName')">
+      Alt Name
+      <span *ngIf="getSortDirection('altName') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('altName') === 'desc'">↓</span>
+    </th>
+    <th (click)="setSortBy('wsName')">
+      WS Name
+      <span *ngIf="getSortDirection('wsName') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('wsName') === 'desc'">↓</span>
+    </th>
+    <th (click)="setSortBy('base')">
+      Base
+      <span *ngIf="getSortDirection('base') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('base') === 'desc'">↓</span>
+    </th>
+    <th (click)="setSortBy('quote')">
+      Quote
+      <span *ngIf="getSortDirection('quote') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('quote') === 'desc'">↓</span>
+    </th>
+    <th (click)="setSortBy('status')">
+      Status
+      <span *ngIf="getSortDirection('status') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('status') === 'desc'">↓</span>
+    </th>
+    <th>Decimals</th>
+    <th>Trading Details</th>
+    <th (click)="setSortBy('activelyMonitor')">
+      Actively Monitor
+      <span *ngIf="getSortDirection('activelyMonitor') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('activelyMonitor') === 'desc'">↓</span>
+    </th>
+    <th (click)="setSortBy('monitorInterval')">
+      Monitor Interval
+      <span *ngIf="getSortDirection('monitorInterval') === 'asc'">↑</span>
+      <span *ngIf="getSortDirection('monitorInterval') === 'desc'">↓</span>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pair of assetPairs">
+    <td (click)="toggleFavourite(pair)">{{ pair.favourite ? '★' : '☆' }}</td>
+    <td>{{ pair.altName }}</td>
+    <td>{{ pair.wsName }}</td>
+    <td>{{ pair.base }}</td>
+    <td>{{ pair.quote }}</td>
+    <td>{{ pair.status }}</td>
+    <td>
+      Cost: {{ pair.costDecimals }},
+      Pair: {{ pair.pairDecimals }},
+      Lot: {{ pair.lotDecimals }}
+    </td>
+    <td>
+      Order Min: {{ pair.orderMin }},
+      Cost Min: {{ pair.costMin }},
+      Tick Size: {{ pair.tickSize }},
+      Lot Multiplier: {{ pair.lotMultiplier }}
+    </td>
+    <td>{{ pair.activelyMonitor ? 'Yes' : 'No' }}</td>
+    <td>{{ pair.monitorInterval }}</td>
+  </tr>
+  </tbody>
+</table>
